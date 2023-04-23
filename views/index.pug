@@ -1,9 +1,17 @@
 extends layout
 
+
 block content
   h1= title
-  p Welcome to #{title}
-  ul
-    for element in list
-      li= element.summary
-      li= element.start.dateTime
+
+  div
+    img(src='')
+    script(type="text/javascript").
+      picSource = URL.createObjectURL(pic)
+      document.querySelector('img').src = picSource
+    ul
+      for element in list
+        li= element.summary
+        li= element.start.dateTime
+        li= picSource
+

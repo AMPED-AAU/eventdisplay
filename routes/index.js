@@ -6,9 +6,11 @@ const process = require('process');
 const {authenticate} = require('@google-cloud/local-auth');
 const {google} = require('googleapis');
 const {colors} = require("debug");
+const {GoogleAuth} = require("google-auth-library");
 
 // If modifying these scopes, delete token.json.
-const SCOPES = ['https://www.googleapis.com/auth/calendar.readonly'];
+const SCOPES = ['https://www.googleapis.com/auth/calendar', 'https://www.googleapis.com/auth/calendar.readonly', 'https://www.googleapis.com/auth/drive', 'https://www.googleapis.com/auth/drive.photos.readonly'];
+
 // The file token.json stores the user's access and refresh tokens, and is
 // created automatically when the authorization flow completes for the first
 // time.
@@ -81,8 +83,8 @@ async function  listEvents(auth) {
     singleEvents: true,
     orderBy: 'startTime',
   });
-  return res.data.items;
   const events = res.data.items;
+  return events;
   if (!events || events.length === 0) {
     console.log('No upcoming events found.');
     return;
@@ -93,12 +95,32 @@ async function  listEvents(auth) {
     console.log(`${start} - ${event.summary}`);
   });
 }
+async function downloadFile(auth) {
+  // Get credentials and build service
+  const service = google.drive({version: 'v3', auth});
+  fileId = '1S5FN35PzXUxB8zIuTq30oFenZqMpfMxF';
+  try {
+    const file = await service.files.get({
+      fileId: fileId,
+      alt: 'media',
+    });
+    return file;
+  } catch (err) {
+    // TODO(developer) - Handle error
+    throw err;
+  }
+}
 /* GET home page. */
 router.get('/', async function(req, res, next) {
   try{
     listE = await authorize().then(listEvents);
-    res.render('index', { title: 'Express', list: listE});
-    console.log(listE)
+    png = await authorize().then(downloadFile);
+    const blob = new Blob([JSON.stringify(png, null, 2)], {
+      type: "image/png",
+    });
+    console.log(blob)
+    console.log(URL.createObjectURL(blob))
+    res.render('index', { title: 'Upcoming events', list: listE, pic: blob});
   }catch (err){
     res.render('error')
   }
