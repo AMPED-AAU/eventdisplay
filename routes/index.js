@@ -84,7 +84,7 @@ async function  listEvents(auth) {
     orderBy: 'startTime',
   });
   const events = res.data.items;
-  return events;
+
   if (!events || events.length === 0) {
     console.log('No upcoming events found.');
     return;
@@ -94,6 +94,7 @@ async function  listEvents(auth) {
     const start = event.start.dateTime || event.start.date;
     console.log(`${start} - ${event.summary}`);
   });
+  return events;
 }
 async function downloadFile(auth) {
   // Get credentials and build service
@@ -114,13 +115,14 @@ async function downloadFile(auth) {
 router.get('/', async function(req, res, next) {
   try{
     listE = await authorize().then(listEvents);
-    png = await authorize().then(downloadFile);
+    /*png = await authorize().then(downloadFile);
     const blob = new Blob([JSON.stringify(png, null, 2)], {
       type: "image/png",
     });
     console.log(blob)
-    console.log(URL.createObjectURL(blob))
-    res.render('index', { title: 'Upcoming events', list: listE, pic: blob});
+    console.log(URL.createObjectURL(blob))*/
+    console.log(listE[1]);
+    res.render('index', { title: 'Upcoming events', list: listE, pic: listE[0].creator.email});
   }catch (err){
     res.render('error')
   }
