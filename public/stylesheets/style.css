@@ -6,8 +6,23 @@ body {
 a {
   color: #00B7FF;
 }
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
 .container {
   border: 15px solid green;
-  padding: 50px;
+  padding: 20px;
   margin: 20px;
+}
+.event {
+  float: left;
+  padding: 15px;
+}
+.pic{
+  width: 25%;
+}
+.description{
+  width: 75%;
 }
