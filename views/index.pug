@@ -27,8 +27,7 @@ block content
                     p= 'Location of the event is: ' + element.location
                     p=' '
                 p= element.description
-                p= 'Start date \t' + element.start.dateTime
-                p= 'End date \t' + element.end.dateTime
+                h3= 'Date \t' + element.start.dateTime.slice(8,10) + '/' + element.start.dateTime.slice(5,7) + '          kl    ' +element.start.dateTime.slice(11,16) + '-' + element.end.dateTime.slice(11,16)
             else if (index%2 !==0)
               div(class= 'event2 pic')
                 img(src='/images/' + element.creator.email + '.png' width='100%' height='auto')
@@ -42,6 +41,6 @@ block content
                     p= 'Location of the event is: ' + element.location
                     p=' '
                 p= '\n' + element.description
-                p= 'Start date \t' + element.start.dateTime
-                p= 'End date \t' + element.end.dateTime
+                h3= 'Date \t' + element.start.dateTime.slice(8,10) + '/' + element.start.dateTime.slice(5,7) + '          kl    ' +element.start.dateTime.slice(11,16) + '-' + element.end.dateTime.slice(11,16)
+
 
