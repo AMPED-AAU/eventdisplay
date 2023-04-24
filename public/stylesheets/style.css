@@ -1,10 +1,21 @@
 body {
+  background-color: wheat;
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  width: auto;
+  height: auto;
 }
 
 a {
   color: #00B7FF;
+}
+h1{
+  color: hotpink;
+  font-weight: bolder;
+  font-family: Rubik;
+}
+h2{
+  font-family: Rubik-ExtraBoldItalic;
 }
 .clearfix::after {
   content: "";
@@ -12,11 +23,15 @@ a {
   display: table;
 }
 .container {
-  border: 15px solid green;
+  border-radius: 25px;
+  background-color: white;
   padding: 20px;
   margin: 20px;
+  width: 800px;
+  height: 200px;
+  overflow: auto;
 }
-.event {
+.event1 {
   float: left;
   padding: 15px;
 }
@@ -25,4 +40,17 @@ a {
 }
 .description{
   width: 75%;
+  overflow: auto;
+}
+.event2 {
+  float: right;
+  padding: 15px;
+}
+.pic{
+  width: 25%;
+
+}
+.description{
+  width: 75%;
+  overflow: auto;
 }
