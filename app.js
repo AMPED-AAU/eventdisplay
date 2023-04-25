@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(helmet.frameguard())
+//app.use(helmet.frameguard({ action: "SAMEORIGIN" }))
 
 console.log("app running")
 app.use('/', indexRouter);
